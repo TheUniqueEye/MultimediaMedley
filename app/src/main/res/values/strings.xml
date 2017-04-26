@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MultimediaMedley</string>
+    <string name="title_action_detail">Action Detail</string>
+    <string-array name="actions">
+        <item>Example</item>
+        <item>Speech-to-Text</item>
+        <item>Text-to-Speech</item>
+        <item>Comic</item>
+        <item>Video</item>
+        <item>Animation</item>
+    </string-array>
+</resources>
