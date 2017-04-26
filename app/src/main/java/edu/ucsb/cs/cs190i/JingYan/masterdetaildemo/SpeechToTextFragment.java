@@ -1,11 +1,13 @@
 package edu.ucsb.cs.cs190i.JingYan.masterdetaildemo;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.RecognizerResultsIntent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,14 @@ import java.util.Locale;
  */
 
 public class SpeechToTextFragment extends SavableFragment {
-    static final int SPEECH_TO_TEXT_REQUEST = 1;  // The request code
-    static final String PROMPT_TEXT = "This is Samantha. Talk to me.";
-    static final String EXCEPTION_TEXT = "Sorry, this function is not supported by your phone.";
+    private static final int SPEECH_TO_TEXT_REQUEST = 1;  // The request code
+    private static final String PROMPT_TEXT = "This is Samantha. Talk to me.";
+    private static final String EXCEPTION_TEXT = "Sorry, this function is not supported by your phone.";
+
+    private static final String TextExtra = "SavedSpokenText";
+    private String spokenText;
+    private TextView speechText;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,7 +39,7 @@ public class SpeechToTextFragment extends SavableFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         ImageButton speechButton = (ImageButton) getActivity().findViewById(R.id.speech_button);
@@ -47,23 +54,29 @@ public class SpeechToTextFragment extends SavableFragment {
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, PROMPT_TEXT); // prompt text
 
                 try {
-                    startActivityForResult(intent,SPEECH_TO_TEXT_REQUEST);
-                }catch (ActivityNotFoundException e){
-                    Toast.makeText(getActivity(),EXCEPTION_TEXT, Toast.LENGTH_LONG).show();
+                    startActivityForResult(intent, SPEECH_TO_TEXT_REQUEST);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getActivity(), EXCEPTION_TEXT, Toast.LENGTH_LONG).show();
                 }
 
             }
         });
+
+        // resume data after rotation
+        if (spokenText != null) {
+            ((TextView) getActivity().findViewById(R.id.speech_text)).setText(spokenText);
+        }
+
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode,resultCode,intent);
-        if(intent!=null) {
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (intent != null) {
             ArrayList<String> list = intent.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            String spokenText = list.get(0);
+            spokenText = list.get(0);
             if (spokenText != null) {
-                TextView speechText = (TextView) getActivity().findViewById(R.id.speech_text);
+                speechText = (TextView) getActivity().findViewById(R.id.speech_text);
                 speechText.setText(spokenText);
             }
         }
@@ -71,11 +84,14 @@ public class SpeechToTextFragment extends SavableFragment {
 
     @Override
     public void saveState(Bundle bundle) {
-
+        bundle.putString(TextExtra, spokenText);
     }
 
     @Override
     public void restoreState(Bundle bundle) {
-
+        if (bundle != null) {
+            spokenText = bundle.getString(TextExtra);
+            //Log.d("spokenText", spokenText);
+        }
     }
 }

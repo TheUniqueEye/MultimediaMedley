@@ -12,11 +12,11 @@ public class FragmentFactory {
             case "Speech-to-Text":
                 return new SpeechToTextFragment();
             case "Text-to-Speech":
-                return new ExampleFragment();
+                return new TextToSpeechFragment();
             case "Comic":
                 return new ExampleFragment();
             case "Video":
-                return new ExampleFragment();
+                return new VideoPlayback();
             case "Animation":
                 return new ExampleFragment();
             default:
