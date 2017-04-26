@@ -1,9 +1,11 @@
 # MultimediaMedley
 
+#### An application that allows a user to enter text via speech, convert text to speech, retrieves an internet resource (XKCD webcomic), handling imagaes with Multi-touch, play video, and trigger a simple custom animation
+
 ---
 
 #### Objects:
-#### Practice Android application development:
+#### Practice Android application development.
 #### 1. Fragments 
 #### 2. Master-detail flow
 #### 3. Multimedia features
