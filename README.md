@@ -1,4 +1,4 @@
-# MultimediaMedley
+# A Multimedia Medley
 
 #### An application that allows a user to enter text via speech, convert text to speech, retrieves an internet resource (XKCD webcomic), handling imagaes with Multi-touch, play video, and trigger a simple custom animation
 
