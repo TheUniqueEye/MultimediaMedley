@@ -10,7 +10,7 @@ public class FragmentFactory {
             case "Example":
                 return new ExampleFragment();
             case "Speech-to-Text":
-                return new ExampleFragment();
+                return new SpeechToTextFragment();
             case "Text-to-Speech":
                 return new ExampleFragment();
             case "Comic":

@@ -9,4 +9,7 @@
         <item>Video</item>
         <item>Animation</item>
     </string-array>
+
+    <string name="STT_hint">Tap button and wait for prompt, then speak!</string>
+
 </resources>
