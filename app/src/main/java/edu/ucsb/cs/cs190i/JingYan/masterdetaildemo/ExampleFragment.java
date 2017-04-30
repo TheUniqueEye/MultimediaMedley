@@ -23,7 +23,7 @@ public class ExampleFragment extends SavableFragment {
         if (text != null) {
             textField.setText(text);
         }
-        return textField;
+        return inflater.inflate(R.layout.example, container, false);
     }
 
     @Override

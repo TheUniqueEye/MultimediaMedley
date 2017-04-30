@@ -60,6 +60,7 @@ public class ComicFragment extends SavableFragment {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity(), "Button Clicked.", Toast.LENGTH_LONG).show();
+                getActivity().findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
                 if (!Objects.equals(editNumber.getText().toString(), "")) {
                     number = Integer.parseInt(editNumber.getText().toString());
@@ -122,6 +123,7 @@ public class ComicFragment extends SavableFragment {
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 if (bitmap != null) {
+                    getActivity().findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                     imageView.setImageBitmap(bitmap);
                     bmp = bitmap;
                 }
