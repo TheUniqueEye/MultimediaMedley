@@ -11,6 +11,11 @@
     </string-array>
 
     <string name="STT_hint">Tap button and wait for prompt, then speak!</string>
-    <string name="TTS_hint">Type something you want me to say!</string>>
+    <string name="TTS_hint">Type something you want me to say!</string>
+    <string name="Comic_hint">Enter number between 1 and 1826</string>
+    <string name="Comic_button">Get Comic</string>
+    <string name="Comic_Exception">Number out of range. Random comic selected.</string>
+
+
 
 </resources>

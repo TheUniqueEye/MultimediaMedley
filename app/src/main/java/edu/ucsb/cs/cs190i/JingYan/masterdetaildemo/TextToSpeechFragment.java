@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import static edu.ucsb.cs.cs190i.JingYan.masterdetaildemo.ComicFragment.hideSoftKeyboard;
+
 /**
  * Created by EYE on 25/04/2017.
  */
@@ -59,6 +61,7 @@ public class TextToSpeechFragment extends SavableFragment {
                 }else {
                     Log.e("TTS Exception", "Init Failed!");
                 }
+                hideSoftKeyboard(getActivity());
             }
         });
 

@@ -13,7 +13,7 @@ import android.widget.VideoView;
  * Created by EYE on 25/04/2017.
  */
 
-public class VideoPlayback extends SavableFragment {
+public class VideoPlaybackFragment extends SavableFragment {
     private VideoView videoView;
     private int videoPosition;
     private static final String TextExtra = "videoBookmark";

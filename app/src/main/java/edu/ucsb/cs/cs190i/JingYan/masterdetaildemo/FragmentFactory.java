@@ -14,9 +14,9 @@ public class FragmentFactory {
             case "Text-to-Speech":
                 return new TextToSpeechFragment();
             case "Comic":
-                return new ExampleFragment();
+                return new ComicFragment();
             case "Video":
-                return new VideoPlayback();
+                return new VideoPlaybackFragment();
             case "Animation":
                 return new ExampleFragment();
             default:
