@@ -10,9 +10,11 @@ package edu.ucsb.cs.cs190i.JingYan.masterdetaildemo;
  * initiate an animation thread that repaints a view at regular intervals.
  */
 
+
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+
 
 /**
  * This class is a helper to wrap up some of the icky code needed to
@@ -38,6 +40,7 @@ public class DrawingThread {
         this.fps = fps;
         this.handler = new Handler(Looper.getMainLooper());
     }
+
 
     /**
      * Returns true if the drawing thread is currently started and running.
@@ -70,6 +73,7 @@ public class DrawingThread {
             thread = null;
         }
     }
+
 
     /*
      * Small runnable helper class that contains the thread's main loop

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Display;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 /**
@@ -19,55 +21,47 @@ import android.widget.ImageView;
  */
 
 public class AnimationFragment extends SavableFragment {
-    private ImageView backgroundImage;
-    private Bitmap bitmap;
-    private Canvas canvas;
-    private Paint paint;
 
-    private float x = 100, y = 200;
-    private int radius = 50;
+    private BallView ballView;
+    private float ballPositionX=-1, ballPositionY=-1;
+    private static final String TextExtraX = "SavedPositionX";
+    private static final String TextExtraY = "SavedPositionY";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        backgroundImage = new ImageView(getActivity());
-        //backgroundImage.setBackgroundColor(Color.GRAY);
+        View rootView = inflater.inflate(R.layout.animation, container, false);
+        ballView = new BallView(getContext());
 
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.animation_fragment);
+        frameLayout.addView(ballView);
 
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(Color.GRAY);
+        DrawingThread drawingThread = new DrawingThread(ballView,50);
+        drawingThread.start();
 
-        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        canvas = new Canvas(bitmap);
-        paint.setColor(Color.RED);
-        canvas.drawCircle(x, y, radius, paint);
-
-        backgroundImage.setImageBitmap(bitmap);
-        return backgroundImage;
+        return rootView;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
+        if(ballPositionX!=-1 && ballPositionY!=-1){
+            ballView.setBallPosition(ballPositionX,ballPositionY);
+        }
     }
-
 
     @Override
     public void saveState(Bundle bundle) {
-
+        bundle.putFloat(TextExtraX,ballView.positionX);
+        bundle.putFloat(TextExtraX,ballView.positionY);
     }
 
     @Override
     public void restoreState(Bundle bundle) {
-
+        if(bundle!=null){
+            ballPositionX = bundle.getFloat(TextExtraX);
+            ballPositionY = bundle.getFloat(TextExtraY);
+        }
     }
 }
