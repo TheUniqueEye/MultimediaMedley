@@ -3,8 +3,11 @@ package edu.ucsb.cs.cs190i.JingYan.masterdetaildemo;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +37,8 @@ public class ComicFragment extends SavableFragment {
     private static final String URL_START = "https://xkcd.com/";
     private Bitmap bmp;
     private static final String TextExtra = "SavedBitmap";
-    private CanvasView imageView;
+    private static final String TextExtra_MATRIX = "SavedMatrix";
+    private CanvasViewUpdated imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class ComicFragment extends SavableFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageView = (CanvasView) getActivity().findViewById(R.id.canvas);
+        imageView = (CanvasViewUpdated) getActivity().findViewById(R.id.canvas);
 
         final EditText editNumber = (EditText) getActivity().findViewById(R.id.number);
 
@@ -133,13 +137,16 @@ public class ComicFragment extends SavableFragment {
 
     @Override
     public void saveState(Bundle bundle) {
+
         bundle.putInt(TextExtra,number);
+        //bundle.putParcelable(TextExtra_MATRIX, (Parcelable) imageView.getMatrix());
     }
 
     @Override
     public void restoreState(Bundle bundle) {
         if(bundle!=null){
             number = bundle.getInt(TextExtra);
+            //imageView.setMatrix((Matrix) bundle.getParcelable(TextExtra_MATRIX));
         }
     }
 
@@ -150,5 +157,4 @@ public class ComicFragment extends SavableFragment {
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
-
 }

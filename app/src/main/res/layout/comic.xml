@@ -6,7 +6,7 @@
     android:padding="@dimen/m">
 
 
-    <edu.ucsb.cs.cs190i.JingYan.masterdetaildemo.CanvasView
+    <edu.ucsb.cs.cs190i.JingYan.masterdetaildemo.CanvasViewUpdated
         android:id="@+id/canvas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

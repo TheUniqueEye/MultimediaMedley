@@ -18,7 +18,7 @@ public class FragmentFactory {
             case "Video":
                 return new VideoPlaybackFragment();
             case "Animation":
-                return new ExampleFragment();
+                return new AnimationFragment();
             default:
                 return null;
         }
