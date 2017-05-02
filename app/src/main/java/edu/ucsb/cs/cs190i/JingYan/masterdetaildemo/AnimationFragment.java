@@ -36,7 +36,7 @@ public class AnimationFragment extends SavableFragment {
         FrameLayout frameLayout = (FrameLayout) rootView.findViewById(R.id.animation_fragment);
         frameLayout.addView(ballView);
 
-        DrawingThread drawingThread = new DrawingThread(ballView,50);
+        DrawingThread drawingThread = new DrawingThread(ballView,60);
         drawingThread.start();
 
         return rootView;

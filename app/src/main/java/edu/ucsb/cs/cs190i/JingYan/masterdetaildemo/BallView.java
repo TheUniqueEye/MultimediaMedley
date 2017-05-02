@@ -18,10 +18,14 @@ import java.util.Random;
  * Created by EYE on 01/05/2017.
  */
 
-public class BallView extends AppCompatImageView{
+public class BallView extends AppCompatImageView {
 
     float positionX = 100;
     float positionY = 100;
+    float lastPositionX;
+    float lastPositionY;
+    int boundX;
+    int boundY;
     int xVelocity = 10;
     int yVelocity = 10;
     int radius = 50;
@@ -41,35 +45,35 @@ public class BallView extends AppCompatImageView{
         super(context, attrs, defStyleAttr);
     }
 
-    public void setBallPosition(float x, float y){
+    public void setBallPosition(float x, float y) {
         positionX = x;
         positionY = y;
     }
 
     @Override
-    protected void onDraw(Canvas canvas){
-        int boundX = canvas.getWidth();
-        int boundY = canvas.getHeight();
+    protected void onDraw(Canvas canvas) {
+        boundX = canvas.getWidth();
+        boundY = canvas.getHeight();
 
         // update position
         positionX += xVelocity;
         positionY += yVelocity;
 
         // at bounds
-        if(positionX > boundX - radius){
+        if (positionX > boundX - radius) {
             xVelocity = xVelocity * -1;
             positionX = boundX - radius;
         }
-        if(positionX < radius){
+        if (positionX < radius) {
             xVelocity = xVelocity * -1;
             positionX = radius;
         }
 
-        if(positionY > boundY - radius){
+        if (positionY > boundY - radius) {
             yVelocity = yVelocity * -1;
             positionY = boundY - radius;
         }
-        if(positionY < radius){
+        if (positionY < radius) {
             yVelocity = yVelocity * -1;
             positionY = radius;
         }
@@ -89,6 +93,8 @@ public class BallView extends AppCompatImageView{
             case MotionEvent.ACTION_DOWN: {
                 positionX = ev.getX();
                 positionY = ev.getY();
+                lastPositionX = positionX;
+                lastPositionY = positionX;
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -97,7 +103,22 @@ public class BallView extends AppCompatImageView{
                 break;
             }
             case MotionEvent.ACTION_UP: {
-                
+                xVelocity = (int)(positionX-lastPositionX)/15;
+                yVelocity = (int)(positionY-lastPositionY)/20;
+                /*
+                Random r = new Random();
+                Random rr = new Random();
+                if(positionY < boundY/2){
+                    yVelocity = -rr.nextInt(20);
+                }else{
+                    yVelocity = rr.nextInt(20);
+                }
+                if(positionX < boundX/2){
+                    xVelocity = -r.nextInt(20);
+                }else{
+                    xVelocity = r.nextInt(20);
+                }
+                */
                 break;
             }
 
