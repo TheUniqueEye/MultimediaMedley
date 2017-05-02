@@ -3,6 +3,7 @@ package edu.ucsb.cs.cs190i.JingYan.masterdetaildemo;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,7 +36,6 @@ public class ComicFragment extends SavableFragment {
     private int number;
     private static final int MAX_NUMBER = 1827;
     private static final String URL_START = "https://xkcd.com/";
-    private Bitmap bmp;
     private static final String TextExtra = "SavedBitmap";
     private static final String TextExtra_MATRIX = "SavedMatrix";
     private CanvasViewUpdated imageView;
@@ -78,8 +78,13 @@ public class ComicFragment extends SavableFragment {
 
                     ((TextView) getActivity().findViewById(R.id.test_text)).setText("comic " + number);
 
+                    if(imageView.matrix!=null){
+                        imageView.setMatrix(new Matrix());
+                    }
+
                     // retrieve online image in a new thread and set bitmap to imageView
                     setImageFromXKCD(number);
+
                 }
 
                 // hide keyboard to get more space
@@ -129,7 +134,6 @@ public class ComicFragment extends SavableFragment {
                 if (bitmap != null) {
                     getActivity().findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                     imageView.setImageBitmap(bitmap);
-                    bmp = bitmap;
                 }
             }
         }.execute();

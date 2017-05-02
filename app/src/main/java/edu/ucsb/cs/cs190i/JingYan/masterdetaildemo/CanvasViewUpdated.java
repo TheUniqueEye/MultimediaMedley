@@ -23,7 +23,7 @@ import android.view.SurfaceView;
 public class CanvasViewUpdated extends SurfaceView implements SurfaceHolder.Callback {
     private Canvas canvas;
     private SurfaceHolder holder;
-    private Bitmap bmp;
+    public Bitmap bmp;
 
 
     //for Zoom & pan touch event
@@ -83,10 +83,12 @@ public class CanvasViewUpdated extends SurfaceView implements SurfaceHolder.Call
 
     }
 
+
     public void setImageBitmap(Bitmap bitmap) {
+        invalidate();
         bmp = bitmap;
         canvas = holder.lockCanvas();
-        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR); // set background to transparent
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR); // set background to transparent
         canvas.drawBitmap(bitmap, 0, 0, null);
         holder.unlockCanvasAndPost(canvas);
     }
